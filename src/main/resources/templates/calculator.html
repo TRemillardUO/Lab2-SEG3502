@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculatrice</title>
+</head>
+<body>
+<div class="calculator-card">
+
+    <div class="calculator-header">
+        <h1>Calculatrice</h1>
+        <p>Vous pouvez entrer deux nombres et sélectionner une opération. Suite à la soumission,
+            l'application vous donnera le résultat de l'opération.</p>
+    </div>
+
+    <form th:action="@{/select}" method="get">
+        <div class="input-group">
+            <label for="first">Premier nombre:</label>
+            <input id="first" type="number" step="any" name="first" th:value="${first}">
+        </div>
+
+        <div class="input-group">
+            <label for="second">Second nombre:</label>
+            <input id="second" type="number" step="any" name="second" th:value="${second}">
+        </div>
+
+        <input type="hidden" name="selectedOperation" th:value="${selectedOperation}">
+
+        <div class="operation-section">
+            <span class="section-label">Opération:</span>
+
+            <div class="operations">
+                <button type="submit" class="operation-button" name="operation" value="+"
+                        th:classappend="${selectedOperation == '+'} ? 'selected'">+</button>
+                <button type="submit" class="operation-button" name="operation" value="-"
+                        th:classappend="${selectedOperation == '-'} ? 'selected'">−</button>
+                <button type="submit" class="operation-button" name="operation" value="*"
+                        th:classappend="${selectedOperation == '*'} ? 'selected'">×</button>
+                <button type="submit" class="operation-button" name="operation" value="/"
+                        th:classappend="${selectedOperation == '/'} ? 'selected'">÷</button>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-button" th:formaction="@{/calculate}" th:disabled="${selectedOperation == ''}">Calculer</button>
+    </form>
+
+    <div class="result-section">
+        <span class="section-label">Résultat:</span>
+        <output class="result-value" th:text="${result}">--</output>
+    </div>
+
+</div>
+</body>
+</html>
