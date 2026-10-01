@@ -65,6 +65,30 @@ class WebControllerTest {
     }
 
     @Test
+    fun division_by_zero_is_undefined() {
+        mockMvc.perform(
+            MockMvcRequestBuilders.get("/calculate")
+                .param("first", "5")
+                .param("second", "0")
+                .param("selectedOperation", "/"))
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andExpect(MockMvcResultMatchers.model().attribute("result", "--"))
+            .andExpect(MockMvcResultMatchers.model().attribute("error", "indéfini"))
+    }
+
+    @Test
+    fun empty_field_shows_error() {
+        mockMvc.perform(
+            MockMvcRequestBuilders.get("/calculate")
+                .param("first", "")
+                .param("second", "3")
+                .param("selectedOperation", "+"))
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andExpect(MockMvcResultMatchers.model().attribute("result", "--"))
+            .andExpect(MockMvcResultMatchers.model().attribute("error", "Veuillez entrer deux nombres"))
+    }
+
+    @Test
     fun selecting_operation_resets_result() {
         mockMvc.perform(
             MockMvcRequestBuilders.get("/select")

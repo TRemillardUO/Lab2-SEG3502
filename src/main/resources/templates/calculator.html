@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculatrice</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
 <div class="calculator-card">
@@ -14,6 +15,8 @@
     </div>
 
     <form th:action="@{/select}" method="get">
+        <button type="submit" disabled hidden></button>
+
         <div class="input-group">
             <label for="first">Premier nombre:</label>
             <input id="first" type="number" step="any" name="first" th:value="${first}">
@@ -46,7 +49,7 @@
 
     <div class="result-section">
         <span class="section-label">Résultat:</span>
-        <output class="result-value" th:text="${result}">--</output>
+        <output class="result-value" th:text="${error != ''} ? ${error} : ${result}">--</output>
     </div>
 
 </div>

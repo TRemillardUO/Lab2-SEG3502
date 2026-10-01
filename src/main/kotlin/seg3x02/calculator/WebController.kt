@@ -19,6 +19,7 @@ class WebController {
         model.addAttribute("second", "")
         model.addAttribute("selectedOperation", "")
         model.addAttribute("result", "--")
+        model.addAttribute("error", "")
     }
 
     @RequestMapping("/")
@@ -53,6 +54,12 @@ class WebController {
         val firstNumber = first.toDoubleOrNull()
         val secondNumber = second.toDoubleOrNull()
         if (firstNumber == null || secondNumber == null) {
+            model.addAttribute("error", "Veuillez entrer deux nombres")
+            return "calculator"
+        }
+
+        if (selectedOperation == "/" && secondNumber == 0.0) {
+            model.addAttribute("error", "indéfini")
             return "calculator"
         }
 

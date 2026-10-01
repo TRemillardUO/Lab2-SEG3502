@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  background: #f5f7fb;
+}
+
+h1 {
+  font-size: large;
+  font-family: serif;
+  font-weight: bold;
+}
+
+.calculator-card {
+  width: 480px;
+  margin: 10px auto;
+}
+
+input,
+button {
+  padding: 12px;
+  margin: 6px;
+}
+
+.operations {
+  display: flex;
+}
+
+.operation-button.selected {
+  background: rgb(176, 52, 52);
+  color: rgb(255, 255, 255);
+}
+
+.submit-button:disabled {
+  background: rgb(200, 178, 178);
+}
+
+.result-section {
+  margin-top: 20px;
+}
